@@ -13,7 +13,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -29,7 +29,7 @@ jobs:
              echo "WORKSPACE=src" >> env.list
              # if we want to fail the step for any critical failed findings (violations) in the assessment scan
              echo "EXIT_FLAG=critical=1" >> env.list 
-             docker run --env-file env.list -v "$(pwd):/src" lacework/codesec-iac:latest
+             docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec-iac:latest
         env:
           LW_ACCOUNT: ${{ vars.LW_ACCOUNT }}
           LW_API_KEY: ${{ secrets.LW_API_KEY }}
